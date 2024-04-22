@@ -307,6 +307,13 @@ document.getElementById('email-form').addEventListener('submit', function(event)
     // Collect form data
     const formData = new FormData(this);
 
+    // Get the selected value of the <select> element
+    const serviceSelect = document.getElementById('serviceSelect');
+    const selectedService = serviceSelect.value;
+
+    // Append the selected value to the FormData object
+    formData.append('Service', selectedService);
+
     // Make an asynchronous POST request using Fetch API
     fetch(this.action, {
         method: 'POST',
