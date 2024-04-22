@@ -136,12 +136,13 @@ background: #090b19;
               </div>
               <div>
                 <div class="basic-form-block w-form">
-                  <form id="email-form" name="email-form" data-name="Email Form" method="get" class="sign-form" data-wf-page-id="65bdd6c3b9c6d94b41f162a1" data-wf-element-id="265bfb3d-6fc7-c31f-3f40-900b292c6f0b">
+                  <form id="email-form" name="email-form" data-name="Email Form" class="sign-form" data-wf-page-id="65bdd6c3b9c6d94b41f162a1" data-wf-element-id="265bfb3d-6fc7-c31f-3f40-900b292c6f0b" method="POST" action="https://script.google.com/macros/s/AKfycbzSt6aPD5QOeTU4B9xfZ-Cj_AisHpBvI-lzbbpY_CtF7vByfLQJ2RT5c9qFNr-HR8vnLw/exec">
                     <div class="field-wrapper">
-                      <div class="field-block"><input class="text-field w-node-_265bfb3d-6fc7-c31f-3f40-900b292c6f0e-41f162a1 w-input" maxlength="256" name="FULLNAME" data-name="FULLNAME" placeholder="First name" type="text" id="FULLNAME" required=""></div>
-                      <div class="field-block"><input class="text-field w-node-_265bfb3d-6fc7-c31f-3f40-900b292c6f11-41f162a1 w-input" maxlength="256" name="phone" data-name="phone" placeholder="Your mobile number" type="tel" id="phone" required=""></div>
-                      <div class="field-block"><input class="text-field w-node-d8d87b96-e003-39df-36f3-4d08d77a260c-41f162a1 w-input" maxlength="256" name="Email" data-name="Email" placeholder="Your email ID" type="email" id="Email-5" required=""></div><select id="choose-the-service-your-want" name="choose-the-service-your-want" data-name="choose the service your want?" required="" class="text-field w-node-cbf11072-c3ab-5416-6b3a-e2f69cc85d58-41f162a1 w-select">
-                        <option value="first">Select the services that best suit your needs</option>
+                      <div class="field-block"><input class="text-field w-node-_265bfb3d-6fc7-c31f-3f40-900b292c6f0e-41f162a1 w-input" maxlength="256" name="Name" data-name="FULLNAME" placeholder="First name" type="text" id="FULLNAME" required=""></div>
+                      <div class="field-block"><input class="text-field w-node-_265bfb3d-6fc7-c31f-3f40-900b292c6f11-41f162a1 w-input" maxlength="256" name="Phone Number" data-name="phone" placeholder="Your mobile number" type="tel" id="phone" required=""></div>
+                      <div class="field-block"><input class="text-field w-node-d8d87b96-e003-39df-36f3-4d08d77a260c-41f162a1 w-input" maxlength="256" name="Email" data-name="Email" placeholder="Your email ID" type="email" id="Email-5" required=""></div>
+                      <select id="choose-the-service-your-want" name="Service" data-name="choose the service your want?" required="" class="text-field w-node-cbf11072-c3ab-5416-6b3a-e2f69cc85d58-41f162a1 w-select">
+                        <option value="first" >Select the services that best suit your needs</option>
                         <option value="secound">Software Purchase</option>
                         <option value="three"> Professional Design Services</option>
                         <option value="four"> Comprehensive Training Programs</option>
@@ -200,10 +201,10 @@ background: #090b19;
                   </select>
                 </div><input type="submit" data-wait="Please wait..." class="form-button w-button" value="Submit">
               </form>
-              <div class="w-form-done">
+              <div class="w-form-done" style="display: none;">
                 <div>Thank you! Your submission has been received!</div>
               </div>
-              <div class="w-form-fail">
+              <div class="w-form-fail" style="display: none;">
                 <div>Oops! Something went wrong while submitting the form.</div>
               </div>
             </div>
@@ -300,6 +301,37 @@ background: #090b19;
         wrapperSpeed: 0.065,
     });
  }
+document.getElementById('email-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Collect form data
+    const formData = new FormData(this);
+
+    // Make an asynchronous POST request using Fetch API
+    fetch(this.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response data here
+        if (data.result === 'success') {
+            // Show success message and hide form
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('myForm').style.display = 'none';
+        } else {
+            // Show failure message
+            document.getElementById('failureMessage').style.display = 'block';
+        }
+    })
+    .catch(error => {
+        // Handle any errors here
+        console.error('Error:', error);
+        // Show failure message
+        document.getElementById('failureMessage').style.display = 'block';
+    });
+});
+    
  </script>
 </body>
 </html>
