@@ -201,10 +201,10 @@ background: #090b19;
                   </select>
                 </div><input type="submit" data-wait="Please wait..." class="form-button w-button" value="Submit">
               </form>
-              <div class="w-form-done" style="display: none;">
+              <div class="w-form-done" style="display: none;" id="successMessage">
                 <div>Thank you! Your submission has been received!</div>
               </div>
-              <div class="w-form-fail" style="display: none;">
+              <div class="w-form-fail" style="display: none;" id="failureMessage">
                 <div>Oops! Something went wrong while submitting the form.</div>
               </div>
             </div>
@@ -328,7 +328,7 @@ document.getElementById('email-form').addEventListener('submit', function(event)
         // Handle any errors here
         console.error('Error:', error);
         // Show failure message
-        document.getElementById('failureMessage').style.display = 'block';
+        //document.getElementById('failureMessage').style.display = 'block';
     });
 });
     
